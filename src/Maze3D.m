@@ -9,14 +9,25 @@
 
 #import "Maze3D.h"
 #import "MazeTypes.h"
-#import "MazeController.h"
-#import "MazeSetting.h"
+
+@interface Maze3D (Private)
+- (unsigned)checkAround:(int)x :(int)y :(int)z :(CellType)value;
+- (void)allocateMap:(int)x :(int)y :(int)z;
+- (void)freeMap;
+@end
+
 
 @implementation Maze3D
-@synthesize sizeX, sizeY, sizeZ, start, goal, map;
-static BOOL hasInitialized = NO;
+@synthesize sizeX;
+@synthesize sizeY;
+@synthesize sizeZ;
+@synthesize start;
+@synthesize goal;
 
-+ (void)initialize	{    if (!hasInitialized) {
+static BOOL hasInitialized = NO;
++ (void)initialize
+{
+    if (!hasInitialized) {
         Maze3DDidInitializeNotification = @"Maze3DDidInitializeNotification";
         hasInitialized = YES;
     }
@@ -42,21 +53,23 @@ static BOOL hasInitialized = NO;
 }
 
 // 選択可能な方向からランダムに選択する
-Direction	selectDirection(unsigned around)	{
-
+Direction
+selectDirection(unsigned around)
+{
     if (DIR_EMPTY(around)) return NODIR;
+
     for(;;) {
         int dir  = rand() % (MAX_DIRECTION + 1);
-        if (DIR_HIT(around, dir)) return dir;
+        if (DIR_HIT(around, dir)) {
+            return dir;
+        }
     }
 }
 
 // 地図を初期化して迷路を作成する。
-- (void)constructMaze:(int)x :(int)y :(int)z controller:(MazeController*)c	{
-
-	_controller = c;
-	NSLog(@"controller: %@", _controller);
-	// メモリ確保
+- (void)constructMaze:(int)x :(int)y :(int)z
+{
+    // メモリ確保
     [self allocateMap:x :y :z];
 
     // 全部壁で埋める
@@ -105,10 +118,10 @@ Direction	selectDirection(unsigned around)	{
     }
     start = makePosition(0, 0, 0);
     goal = makePosition(2 * (int)((x - 1) / 2), 2 * (int)((y - 1) / 2), 2 * (int)((z - 1) / 2));        
-	[self.propertyNamesAndTypes log];
-	[$(@"%d",map[0]) log];
+
     // 変更を通知する
-    [AZNOTCENTER postNotificationName:Maze3DDidInitializeNotification object:self];
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:Maze3DDidInitializeNotification object:self];
 }
 // Map上での壁の有無を戻す
 // d=DIRXでx=3, y=4, z=5の壁とは、(3,4,5)と(2,4,5)の間の壁のこと
@@ -183,7 +196,9 @@ Direction	selectDirection(unsigned around)	{
 
 - (void)allocateMap:(int)x :(int)y :(int)z
 {
-    if (map != NULL)   [self freeMap]; 
+    if (map != NULL) {
+        [self freeMap];
+    }
     map = (char ***) malloc((sizeof (char **)) * x);
     int i;
     for (i = 0; i < x; i++) {
