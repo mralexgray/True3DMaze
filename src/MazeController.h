@@ -5,12 +5,7 @@
 //  Created by Terazzo on 11/12/13.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "MazeView.h"
-#import "ViewPoint.h"
-#import "Maze3D.h"
-#import "MazeSetting.h"
-
+@class MazeView, ViewPoint, Maze3D, MazeSetting;
 @interface 				MazeController : NSObject
 @property(weak) IBOutlet 	NSWindow * window;
 @property(weak) IBOutlet   MazeView * mazeView;
@@ -20,13 +15,13 @@
 @property(strong)            Maze3D * maze;
 
 - (IBAction)reconstructMaze:	 (id)sender;
-- (IBAction)runForSettingSheet:(id)sender;
 - (IBAction)endSettingSheet:   (id)sender;
+- (IBAction)runForSettingSheet:(id)sender;
 
-- (void)moveBack;
-- (void)moveForwardOrStay;
-- (void)rotateViewPoint:			(CGFloat)angleX :(CGFloat)angleY;
-- (void)temporaryRotateViewPoint:(CGFloat)angleX :(CGFloat)angleY;
+- (void) moveBack;
+- (void) moveForwardOrStay;
+- (void) rotateViewPoint:			 (CGF)angleX :(CGF)angleY;
+- (void) temporaryRotateViewPoint:(CGF)angleX :(CGF)angleY;
 @end
 
 //{   IBOutlet 		NSWindow * __weak window;
