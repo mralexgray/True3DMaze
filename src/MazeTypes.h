@@ -5,6 +5,42 @@
 //  Created by Terazzo on 11/12/14.
 //
 
+
+
+#ifdef MAZE_3D_INCLUDE
+#define MAZE_3D_EXTERN
+#else
+#define MAZE_3D_EXTERN extern
+#endif
+
+
+// Notification names
+MAZE_3D_EXTERN NSString *Maze3DDidInitializeNotification;
+
+
+#ifdef VIEW_POINT_INCLUDE
+#define VIEW_POINT_EXTERN
+#else
+#define VIEW_POINT_EXTERN extern
+#endif
+
+
+#ifdef MAZE_SETTING_INCLUDE
+#define MAZE_SETTING_EXTERN
+#else
+#define MAZE_SETTING_EXTERN extern
+#endif
+
+// Notification names
+//MAZE_SETTING_EXTERN NSString
+#define MazeAppearanceChanged @"MazeAppearanceSettingDidChangeNotification"
+
+
+
+// Notification names
+VIEW_POINT_EXTERN NSString *ViewPointDidChangeNotification;
+VIEW_POINT_EXTERN NSString *ViewPointTransformKey;
+
 // 壁等の方向
 typedef enum {
     DIR_NONE,
@@ -45,7 +81,7 @@ typedef struct _MazePosition {
     int z;
 } MazePosition;
 
-#define PIECE_SIZE 20.0f
+//#define PIECE_SIZE 20.0f
 
 #define EPS (PIECE_SIZE / 4.0f)
 
