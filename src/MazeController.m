@@ -29,9 +29,9 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.viewPoint = [[[ViewPoint alloc] init] autorelease];
-        self.maze = [[[Maze3D alloc] init] autorelease];
-        self.setting = [[[MazeSetting alloc] init] autorelease];
+        self.viewPoint = [[ViewPoint alloc] init];
+        self.maze = [[Maze3D alloc] init];
+        self.setting = [[MazeSetting alloc] init];
     }
     return self;
 }
@@ -54,17 +54,17 @@
     [[NSNotificationCenter defaultCenter]
          addObserver:mazeView selector:@selector(viewPointDidChange:)
              name:ViewPointDidChangeNotification object:viewPoint];
-    [[NSNotificationCenter defaultCenter]
-         addObserver:mazeView selector:@selector(appearanceSettingDidChange:)
-             name:MazeAppearanceSettingDidChangeNotification object:setting];
+//    [[NSNotificationCenter defaultCenter]
+//         addObserver:mazeView selector:@selector(appearanceSettingDidChange:)
+//             name:MazeAppearanceSettingDidChangeNotification object:setting];
     // initialize
     [self constructMaze];
 }
 
-- (void)windowWillClose:(NSNotification *)notification
-{
-    [self autorelease];
-}
+//- (void)windowWillClose:(NSNotification *)notification
+//{
+//    [self autorelease];
+//}
 
 // 迷路を再作成
 - (IBAction)reconstructMaze:(id)sender
@@ -74,7 +74,7 @@
 - (void)constructMaze
 {
     [maze constructMaze:setting.mazeSizeX :setting.mazeSizeY :setting.mazeSizeZ];
-    [setting notifyAppearanceChanged];
+//    [setting notifyAppearanceChanged];
 }
 
 // 設定シートを表示
@@ -96,6 +96,13 @@
 - (void)sheetDidEnd:(NSWindow*)sheet returnCode:(int)returnCode contextInfo:(void*)contextInfo
 {
     [settingPanel orderOut:self];
+}
+
+- (void)moveBack	{										// Advance if possible
+																//		DockPosition position = [viewPoint getForwardDPosition];
+																//	if ([dock hasWallAt:position for:DDIR_NONE] || setting.throughWalls == NSOnState) {
+	[viewPoint moveDBack];
+	[self notifyViewPointChanged:viewPoint.transform];
 }
 
 // 可能なら前進
@@ -151,14 +158,10 @@
         postNotificationName:ViewPointDidChangeNotification object:viewPoint userInfo:userInfo];
 }
 
-- (void)dealloc
-{
-    self.window = nil;
-    self.settingPanel = nil;
-    self.mazeView = nil;
-    self.viewPoint = nil;
-    self.maze = nil;
-    self.setting = nil;
-    [super dealloc];
-}
+//- (void)dealloc
+//{
+//    self.window = nil;
+//    self.settingPanel = nil;
+//    self.mazeView = nil;
+//}
 @end

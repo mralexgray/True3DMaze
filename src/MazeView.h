@@ -10,9 +10,9 @@
 
 @class MazeController;
 @interface MazeView : NSView {
-    IBOutlet MazeController *controller;
+//    IBOutlet MazeController *controller;
     NSPoint mouseDownPoint; // マウスダウン位置
     BOOL dragging;          // ドラッグ有無
 }
-@property(assign) IBOutlet MazeController *controller;
+@property(weak) IBOutlet MazeController *controller;
 @end

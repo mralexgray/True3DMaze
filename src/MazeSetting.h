@@ -8,27 +8,23 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface MazeSetting : NSObject {
-    int mazeSizeX;
-    int mazeSizeY;
-    int mazeSizeZ;
-    CGFloat opaque;
-    CGFloat borderWidth;
-    CGFloat cornerRadius;
-    NSColor *wallColor;
-    int throughWalls;
-    int freeRotation;
-    
-}
-@property int mazeSizeX;
-@property int mazeSizeY;
-@property int mazeSizeZ;
-@property CGFloat opaque;
-@property CGFloat borderWidth;
-@property CGFloat cornerRadius;
-@property(retain) NSColor *wallColor;
-@property int throughWalls;
-@property int freeRotation;
+@interface MazeSetting : NSObject
+//{
+//    int mazeSizeX;
+//    int mazeSizeY;
+//    int mazeSizeZ;
+//    CGFloat opaque;
+//    CGFloat borderWidth;
+//    CGFloat cornerRadius;
+//    NSColor *wallColor;
+//    int throughWalls;
+//    int freeRotation;
+//    
+//}
+@property int mazeSizeX, mazeSizeY, mazeSizeZ, throughWalls, freeRotation;
+@property CGFloat opaque, borderWidth, cornerRadius;
+@property(strong) NSColor *wallColor;
+
 - (void)notifyAppearanceChanged;
 @end
 
@@ -40,7 +36,8 @@
 #endif
 
 // Notification names
-MAZE_SETTING_EXTERN NSString *MazeAppearanceSettingDidChangeNotification;
+//MAZE_SETTING_EXTERN NSString
+#define MazeAppearanceSettingDidChangeNotification @"MazeAppearanceSettingDidChangeNotification"
 
 
 

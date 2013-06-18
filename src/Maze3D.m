@@ -33,23 +33,23 @@ static BOOL hasInitialized = NO;
     }
 }
 
-// 周りの状況を表したbit列を戻す
+// Return the bit string representing the situation around
 // 00ZYXzyx
-// x: x方向に-2した所がtypeと等しいなら1、等しくなければ0
-// y: y方向に-2した所がtypeと等しいなら1、等しくなければ0
-// z: z方向に-2した所がtypeと等しいなら1、等しくなければ0
-// X: x方向に+2した所がtypeと等しいなら1、等しくなければ0
-// Y: y方向に+2した所がtypeと等しいなら1、等しくなければ0
-// Z: z方向に+2した所がtypeと等しいなら1、等しくなければ0
+// X: 1, 0 must be equal to -2 in the direction where if x is equal to the type
+// Y: 1, 0 must be equal to -2 in the direction of where it is equal to y if the type
+// Z: 1, 0 must be equal to where it is equal to -2 in the z-direction if the type
+// X: 1, 0 must be equal to where it is equal to +2 in the x direction if the type
+// Y: 1, 0 +2 where it must be equal to the y-direction is equal to the type if
+// Z: 1, 0 +2 where it must be equal to the z-direction if the type is equal to
 - (unsigned)checkAround:(int)x :(int)y :(int)z :(CellType)type
 {
     return 
-    (((x >= 2 && map[x -2][y][z] == type) ? 1 :0) << XMINUS) |
-    (((y >= 2 && map[x][y - 2][z] == type) ? 1 :0) << YMINUS) |
-    (((z >= 2 && map[x][y][z - 2] == type) ? 1 :0) << ZMINUS) |
-    (((x < sizeX - 2 && map[x + 2][y][z] == type) ? 1 :0) << XPLUS) |
-    (((y < sizeY - 2 && map[x][y + 2][z] == type) ? 1 :0) << YPLUS) |
-    (((y < sizeZ - 2 && map[x][y][z + 2] == type) ? 1 :0) << ZPLUS);
+    ((( x >= 2 		 && map[x - 2][y][z] == type) ? 1 :0) << XMINUS) |
+    ((( y >= 2 		 && map[x][y - 2][z] == type) ? 1 :0) << YMINUS) |
+    ((( z >= 2			 && map[x][y][z - 2] == type) ? 1 :0) << ZMINUS) |
+    ((( x < sizeX - 2 && map[x + 2][y][z] == type) ? 1 :0) <<  XPLUS) |
+    ((( y < sizeY - 2 && map[x][y + 2][z] == type) ? 1 :0) <<  YPLUS) |
+    ((( y < sizeZ - 2 && map[x][y][z + 2] == type) ? 1 :0) <<  ZPLUS);
 }
 
 // 選択可能な方向からランダムに選択する
@@ -192,7 +192,6 @@ selectDirection(unsigned around)
 - (void)dealloc
 {
     [self freeMap];
-    [super dealloc];
 }
 
 - (void)allocateMap:(int)x :(int)y :(int)z

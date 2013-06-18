@@ -14,24 +14,15 @@
 
 @implementation MazeSetting
 
-@synthesize mazeSizeX;
-@synthesize mazeSizeY;
-@synthesize mazeSizeZ;
-@synthesize opaque;
-@synthesize borderWidth;
-@synthesize cornerRadius;
-@synthesize wallColor;
-@synthesize throughWalls;
-@synthesize freeRotation;
+@synthesize mazeSizeX, mazeSizeY, mazeSizeZ, opaque, borderWidth, cornerRadius, wallColor, throughWalls, freeRotation;
 
 static BOOL hasInitialized = NO;
 static NSArray *appearanceKeys;
 + (void)initialize
 {
     if (!hasInitialized) {
-        MazeAppearanceSettingDidChangeNotification = @"MazeAppearanceSettingDidChangeNotification";
-        appearanceKeys = [[NSArray arrayWithObjects:
-           @"opaque", @"borderWidth", @"cornerRadius", @"wallColor", nil] retain];
+//        MazeAppearanceSettingDidChangeNotification = @"MazeAppearanceSettingDidChangeNotification";
+//        appearanceKeys = ;
         hasInitialized = YES;
     }
 }
@@ -53,20 +44,18 @@ static NSArray *appearanceKeys;
 }
 - (void)didChangeValueForKey:(NSString *)key
 {
+		NSLog(@"%@  key: %@", NSStringFromSelector(_cmd), key);
     [super didChangeValueForKey:key];
-    if ([appearanceKeys containsObject:key]) {
-        [self notifyAppearanceChanged];
-    }
+	if ([@[@"opaque", @"borderWidth", @"cornerRadius", @"wallColor"] containsObject:key])
+		[NSNotificationCenter postNotificationName:MazeAppearanceSettingDidChangeNotification object:self];
 }
-- (void)notifyAppearanceChanged
-{
-    [[NSNotificationCenter defaultCenter]
-        postNotificationName:MazeAppearanceSettingDidChangeNotification
-        object:self];
-}
-- (void)dealloc
-{
-    self.wallColor = nil;
-    [super dealloc];
-}
+//        [self notifyAppearanceChanged];
+//    }
+//}
+//- (void)notifyAppearanceChanged
+//{
+//    [[NSNotificationCenter defaultCenter]
+//        postNotificationName:MazeAppearanceSettingDidChangeNotification
+//        object:self];
+//}
 @end

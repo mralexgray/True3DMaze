@@ -7,7 +7,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface True3DMazeAppDelegate : NSObject <NSApplicationDelegate> {
-}
+@interface True3DMazeAppDelegate : NSObject <NSApplicationDelegate>
+
 - (IBAction)newMaze:(id)sender;
 @end

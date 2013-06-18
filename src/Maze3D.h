@@ -16,16 +16,15 @@
     MazePosition goal;
     char ***map;
 }
-@property(readonly) int sizeX;
-@property(readonly) int sizeY;
-@property(readonly) int sizeZ;
-@property(readonly) MazePosition start;
-@property(readonly) MazePosition goal;
+@property(readonly) int sizeX, sizeY, sizeZ;
+@property(readonly) MazePosition start, goal;
+
 - (void)constructMaze:(int)x :(int)y :(int)z;
-- (BOOL)hasWallAt:(MazePosition)position for:(WallDirection)direction;
-- (BOOL)isAtGoal:(MazePosition)position;
-- (BOOL)position:(MazePosition)position isAroundStartFor:(WallDirection)direction;
-- (BOOL)position:(MazePosition)position isAroundGoalFor:(WallDirection)direction;
+
+- (BOOL) isAtGoal: (MazePosition)pos;
+- (BOOL) hasWallAt:(MazePosition)pos              for:(WallDirection)direction;
+- (BOOL) position: (MazePosition)pos  isAroundGoalFor:(WallDirection)direction;
+- (BOOL) position: (MazePosition)pos isAroundStartFor:(WallDirection)direction;
 @end
 
 #ifdef MAZE_3D_INCLUDE

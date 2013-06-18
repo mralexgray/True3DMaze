@@ -50,7 +50,17 @@ typedef struct _MazePosition {
 #define EPS (PIECE_SIZE / 4.0f)
 
 
-extern MazePosition makePosition(int x, int y, int z);
+NS_INLINE MazePosition makePosition(int x, int y, int z) {
+//MazePosition
+//makePosition(int x, int y, int z)
+
+	MazePosition position;
+	position.x = x;
+	position.y = y;
+	position.z = z;
+	return position;
+}
+
 
 
 

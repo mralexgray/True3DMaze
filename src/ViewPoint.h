@@ -9,7 +9,7 @@
 #import "MazeTypes.h"
 
 @interface ViewPoint : NSObject {
-    CATransform3D transform;
+//    CATransform3D transform;
 }
 @property CATransform3D transform;
 - (void)setPosition:(MazePosition)position;
@@ -17,6 +17,7 @@
 - (MazePosition)getPositionForInvertedTransform:(CATransform3D)inverted;
 - (MazePosition)getForwardPosition;
 - (void)moveForward;
+- (void)moveDBack;
 @end
 
 #ifdef VIEW_POINT_INCLUDE
