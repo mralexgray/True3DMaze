@@ -8,24 +8,11 @@
 #import <Cocoa/Cocoa.h>
 #import "MazeController.h"
 
-@class MazeController, MazeLayer;
-@interface MazeView : NSView
-
-@property (weak) MazeLayer *hoveredLayer;
-@property NSPoint mouseDownPoint; // マウスダウン位置
-@property BOOL dragging;          // ドラッグ有無
-
+@class MazeController;
+@interface MazeView : NSView {
+//    IBOutlet MazeController *controller;
+    NSPoint mouseDownPoint; // マウスダウン位置
+    BOOL dragging;          // ドラッグ有無
+}
 @property(weak) IBOutlet MazeController *controller;
 @end
-
-@interface MazeView ()
-- (void) updatePerspective;
-- (void) updateViewPoint:			(CATransform3D)transform;
-- (void) updateAppearanceSetting:(MazeSetting*)setting;
-- (void) mazeDidInitialize:		(NSNOT*)notification;
-- (void) viewPointDidChange:		(NSNOT*)notification;
-@end
-
-
-
-//    IBOutlet MazeController *controller;
