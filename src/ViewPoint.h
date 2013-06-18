@@ -8,26 +8,18 @@
 #import <QuartzCore/CoreAnimation.h>
 #import "MazeTypes.h"
 
-@interface ViewPoint : NSObject {
-//    CATransform3D transform;
-}
+@class  Maze3D;
+@interface ViewPoint : NSObject
+@property (weak) Maze3D *maze;
 @property CATransform3D transform;
-- (void)setPosition:(MazePosition)position;
-- (MazePosition)getPosition;
+@property (nonatomic) MazePosition position;
+@property (readonly) MazePosition forwardPosition;
+//- (void)setPosition:(MazePosition)position;
+//- (MazePosition)getPosition;
 - (MazePosition)getPositionForInvertedTransform:(CATransform3D)inverted;
-- (MazePosition)getForwardPosition;
+//- (MazePosition)getForwardPosition;
 - (void)moveForward;
 - (void)moveDBack;
 @end
 
-#ifdef VIEW_POINT_INCLUDE
-#define VIEW_POINT_EXTERN
-#else
-#define VIEW_POINT_EXTERN extern
-#endif
-
-// Notification names
-VIEW_POINT_EXTERN NSString *ViewPointDidChangeNotification;
-VIEW_POINT_EXTERN NSString *ViewPointTransformKey;
-
-
+//{   CATransform3D transform;	}
