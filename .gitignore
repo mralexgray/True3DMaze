@@ -1,0 +1,4 @@
+*.xcuserstate
+.DS_Store
+dist
+src/True3DMaze2013.xcodeproj/project.xcworkspace/xcuserdata/localadmin.xcuserdatad/UserInterfaceState.xcuserstate
