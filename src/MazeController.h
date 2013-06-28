@@ -5,12 +5,8 @@
 //  Created by Terazzo on 11/12/13.
 //
 
-#import <Cocoa/Cocoa.h>
-#import "MazeView.h"
-#import "ViewPoint.h"
-#import "Maze3D.h"
-#import "MazeSetting.h"
 
+@class  MazeView, MazeSetting, Maze3D, ViewPoint;
 @interface 				MazeController : NSObject
 @property(weak) IBOutlet 	NSWindow * window;
 @property(weak) IBOutlet   MazeView * mazeView;

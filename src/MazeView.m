@@ -8,7 +8,10 @@
 
 #import "MazeView.h"
 #import "ViewPoint.h"
+#import "MazeSetting.h"
+#import "MazeController.h"
 #import "MazeLayer.h"
+#import "Maze3D.h"
 
 @interface MazeView(Private)
 - (void)updatePerspective;

@@ -5,11 +5,12 @@
 //  Created by Terazzo on 11/12/13.
 //
 #import <QuartzCore/CoreAnimation.h>
-
+#import <Cocoa/Cocoa.h>
 #import "MazeController.h"
-#import "ViewPoint.h"
-#import "MazeView.h"
 #import "MazeLayer.h"
+#import "MazeView.h"
+#import "ViewPoint.h"
+#import "Maze3D.h"
 #import "MazeSetting.h"
 
 @interface MazeController(Private)
